@@ -30,15 +30,12 @@ func main() {
 func processGame(line string, red, green, blue int) int {
 	parts := strings.Split(line, ":")
 
-	gameIDStr := strings.Fields(parts[0])[1]
-	gameID, err := strconv.Atoi(gameIDStr)
-	if err != nil {
-		panic("Invalid game ID")
-	}
+	maxRed := 0
+	maxBlue := 0
+	maxGreen := 0
 
 	sets := strings.Split(parts[1], ";")
 	for _, set := range sets {
-		var redCount, greenCount, blueCount int
 
 		cubes := strings.Split(set, ",")
 		for _, cube := range cubes {
@@ -50,18 +47,14 @@ func processGame(line string, red, green, blue int) int {
 
 			switch cubeInfo[1] {
 			case "red":
-				redCount = count
+				maxRed = max(maxRed, count)
 			case "green":
-				greenCount = count
+				maxGreen = max(maxGreen, count)
 			case "blue":
-				blueCount = count
+				maxBlue = max(maxBlue, count)
 			}
-		}
-
-		if redCount > red || greenCount > green || blueCount > blue {
-			return 0
 		}
 	}
 
-	return gameID
+	return maxRed * maxBlue * maxGreen
 }
