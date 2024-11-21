@@ -29,12 +29,6 @@ cd 2023/rust/
 cargo run
 ```
 
-### Python
-```bash
-cd 2023/python/
-python solution.py
-```
-
 ### Go
 ```bash
 cd 2023/go/
